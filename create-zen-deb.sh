@@ -10,6 +10,7 @@ BUILD_DIR="${PACKAGE_NAME}_${VERSION}"
 INSTALL_DIR="$BUILD_DIR/opt/zen"
 BIN_DIR="$BUILD_DIR/usr/local/bin"
 DESKTOP_DIR="$BUILD_DIR/usr/local/share/applications"
+ICON_BASE="$BUILD_DIR/usr/share/icons/hicolor"
 
 # === CLEAN UP OLD BUILDS ===
 rm -rf "$BUILD_DIR"
@@ -27,6 +28,14 @@ cat <<EOF > "$BIN_DIR/zen"
 /opt/zen/zen "\$@"
 EOF
 chmod +x "$BIN_DIR/zen"
+
+# === INSTALL ICONS ===
+echo "Copying icons..."
+for size in 16 32 48 64 128; do
+  mkdir -p "$ICON_BASE/${size}x${size}/apps"
+  cp "$INSTALL_DIR/browser/chrome/icons/default/default${size}.png" \
+     "$ICON_BASE/${size}x${size}/apps/zen.png"
+done
 
 # === CREATE .desktop FILE ===
 echo "Creating .desktop file..."
@@ -71,6 +80,16 @@ Architecture: $ARCH
 Maintainer: Shariq Shahbaz <iamsh4r10@gmail.com>
 Description: Zen Browser - A privacy-focused browser that helps you browse in peace.
 EOF
+
+# === POSTINST TO UPDATE ICON CACHE ===
+cat <<'EOF' > "$BUILD_DIR/DEBIAN/postinst"
+#!/bin/bash
+set -e
+if command -v gtk-update-icon-cache &>/dev/null; then
+  gtk-update-icon-cache -f /usr/share/icons/hicolor
+fi
+EOF
+chmod +x "$BUILD_DIR/DEBIAN/postinst"
 
 # === BUILD THE DEB PACKAGE ===
 echo "Building .deb package..."
