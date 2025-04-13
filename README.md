@@ -1,6 +1,9 @@
 # Zen Browser Debian
-This is basically an attempt at reverse engineering the provided install script
-for the zen browser, found here:
+This repository contains unofficial deb packages of the [zen browser](https://zen-browser.app/). As well as 
+instructions on how to build the deb packages from the official tarballs. 
+
+It is basically an attempt to reverse engineer the provided install script
+for the zen browser, found at the link below for the purpose of creating deb packages.
 [https://updates.zen-browser.app/install.sh](https://updates.zen-browser.app/install.sh)
 
 ## Steps to recreate
@@ -9,7 +12,7 @@ for the zen browser, found here:
 git clone https://github.com/sh4r10/zen-browser-debian.git & cd zen-browser-debian
 ```
 
-2. Get the latest tarball for the zen-browser
+2. Get the latest official tarball for the zen-browser from [here](https://github.com/zen-browser/desktop/releases). 
 ```bash
 wget https://github.com/zen-browser/desktop/releases/latest/download/zen.linux-x86_64.tar.xz
 ```
