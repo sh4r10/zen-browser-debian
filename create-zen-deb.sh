@@ -94,7 +94,7 @@ chmod +x "$BUILD_DIR/DEBIAN/postinst"
 # Avoid dpkg-build failing due to control directory not
 # having other rX permissions.
 
-chmod -R a+rX .
+chmod -R a+rX $BUILD_DIR
 
 # === BUILD THE DEB PACKAGE ===
 echo "Building .deb package..."
