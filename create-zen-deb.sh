@@ -91,7 +91,7 @@ fi
 EOF
 chmod +x "$BUILD_DIR/DEBIAN/postinst"
 
-# Avoid dpkg-build failing due to content directory not 
+# Avoid dpkg-build failing due to control directory not
 # having other rX permissions.
 
 chmod -R a+rX .
