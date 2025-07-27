@@ -3,7 +3,7 @@ set -euo pipefail
 
 # === CONFIG ===
 PACKAGE_NAME="zen-browser"
-VERSION="1.14.7b"
+VERSION="1.14.9b"
 ARCH="amd64"
 TARBALL="zen.linux-x86_64.tar.xz"
 BUILD_DIR="${PACKAGE_NAME}_${VERSION}"
