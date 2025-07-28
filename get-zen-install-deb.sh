@@ -1,12 +1,9 @@
 #!/bin/bash
 #
-# Time-stamp: <Tuesday 2025-07-29 08:15:18 +1000 Graham Williams>
+# Time-stamp: <Tuesday 2025-07-29 08:40:45 +1000 Graham Williams>
 #
-# Download the current distribution of zen for Linux and update the
-# create-zen-deb.sh script with the new version, ready to create and
-# then install a .deb.
-#
-# Author: Graham.Williams@togaware.com
+# Download the current distribution of zen for Linux, create the .deb
+# and then install the .deb.
 
 set -euo pipefail
 
@@ -26,14 +23,10 @@ wget --quiet --show-progress \
 
 VERSION=$(tar -xJf zen.linux-x86_64.tar.xz --to-stdout zen/application.ini | grep '^Version=' | cut -d'=' -f2)
 
-# Update the VERSION line in create-zen-deb.sh.
+# Create the .deb package.
 
-sed -i "s/VERSION=\"[^\"]*\"/VERSION=\"$VERSION\"/" create-zen-deb.sh
+bash create-zen-deb.sh
 
-echo
-echo "You can now create zen-browser_${VERSION}.deb to install the package:"
-echo
-echo "./create-zen-deb.sh"
-echo
-echo "sudo dpkg -i zen-browser_${VERSION}.deb"
-echo
+# Install the .deb package locally.
+
+sudo dpkg -i zen-browser_${VERSION}.deb
