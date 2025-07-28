@@ -3,13 +3,13 @@ This repository contains unofficial deb packages of the [zen browser](https://ze
 instructions on how to build the deb packages from the official tarballs. 
 
 It is basically an attempt to reverse engineer the provided install script
-for the zen browser, found at the link below for the purpose of creating deb packages.
+for the zen browser, found at the link below, for the purpose of creating deb packages.
 [https://updates.zen-browser.app/install.sh](https://updates.zen-browser.app/install.sh)
 
 ## Steps to recreate
 1. Clone this repository and enter the folder
 ```bash 
-git clone https://github.com/sh4r10/zen-browser-debian.git & cd zen-browser-debian
+git clone https://github.com/sh4r10/zen-browser-debian.git && cd zen-browser-debian
 ```
 
 2. Get the latest official tarball for the zen-browser from [here](https://github.com/zen-browser/desktop/releases). 
@@ -35,7 +35,7 @@ DESKTOP_DIR="$BUILD_DIR/usr/local/share/applications"
 ./create-zen-deb.sh
 ```
 If everything goes to plan, you should now have .deb file in your folder. This
-can then be installed with dpkg or uploaded to apt repo.
+can then be installed with dpkg or uploaded to an apt repo.
 
 ```
 dpkg -i name-of-file.deb
