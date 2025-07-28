@@ -3,7 +3,7 @@ set -euo pipefail
 
 # === CONFIG ===
 PACKAGE_NAME="zen-browser"
-VERSION="1.11.5b"
+VERSION="1.14.7b"
 ARCH="amd64"
 TARBALL="zen.linux-x86_64.tar.xz"
 BUILD_DIR="${PACKAGE_NAME}_${VERSION}"
@@ -91,9 +91,14 @@ fi
 EOF
 chmod +x "$BUILD_DIR/DEBIAN/postinst"
 
+# Avoid dpkg-build failing due to control directory not
+# having other rX permissions.
+
+chmod -R a+rX $BUILD_DIR
+
 # === BUILD THE DEB PACKAGE ===
 echo "Building .deb package..."
-dpkg-deb --build "$BUILD_DIR"
+dpkg-deb --build --root-owner-group "$BUILD_DIR"
 
 # === FINAL CLEANUP ===
 echo "Final cleanup..."
