@@ -2,10 +2,10 @@
 set -euo pipefail
 
 # === CONFIG ===
-PACKAGE_NAME="zen-browser"
-VERSION="1.14.9b"
-ARCH="amd64"
 TARBALL="zen.linux-x86_64.tar.xz"
+PACKAGE_NAME="zen-browser"
+VERSION=$(tar -xJf ${TARBALL} --to-stdout zen/application.ini | grep '^Version=' | cut -d'=' -f2)
+ARCH="amd64"
 BUILD_DIR="${PACKAGE_NAME}_${VERSION}"
 INSTALL_DIR="$BUILD_DIR/opt/zen"
 BIN_DIR="$BUILD_DIR/usr/local/bin"
