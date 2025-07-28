@@ -1,8 +1,22 @@
 #!/bin/bash
 set -euo pipefail
 
-# === CONFIG ===
+# Check the TARBALL has been downloaded.
+
 TARBALL="zen.linux-x86_64.tar.xz"
+
+if [ ! -e "${TARBALL}" ]; then
+    echo "error: $0: Did not find the required tarball."
+    echo
+    echo "Please get the offical tarball '${TARBALL}' from"
+    echo
+    echo "  https://github.com/zen-browser/desktop/releases"
+    echo
+    exit 1
+fi
+
+
+# === CONFIG ===
 PACKAGE_NAME="zen-browser"
 VERSION=$(tar -xJf ${TARBALL} --to-stdout zen/application.ini | grep '^Version=' | cut -d'=' -f2)
 ARCH="amd64"
